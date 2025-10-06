@@ -98,7 +98,7 @@ function closeFirstPopup() {
 }
 
 function showLastPopup() {
-    lastPopupText.textContent = "Cảm ơn bạn đã xem hết điều mình muốn gửi gắm. Mong em luôn vui vẻ và hạnh phúc. Nếu có dịp, mình rất muốn cùng em đi chơi Trung Thu!";
+    lastPopupText.textContent = "Cảm ơn bạn đã xem hết điều mình muốn gửi gắm. Mong bạn luôn vui vẻ và hạnh phúc. Nếu có dịp, mình rất muốn cùng bạn đi chơi Trung Thu!";
     lastPopup.classList.add("show");
 }
 
