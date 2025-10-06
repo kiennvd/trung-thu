@@ -45,9 +45,16 @@ function createLantern() {
     lantern.style.animationDuration = duration + "s";
 
     lantern.addEventListener("click", () => {
-        let randomMsg = messages[Math.floor(Math.random() * messages.length)];
-        document.getElementById("popupText").innerText = randomMsg.text;
-        document.getElementById("popupImg").src = randomMsg.img;
+        if (messages.length === 0) {
+            document.getElementById("popupText").innerText = "Bạn đã xem hết tất cả lời chúc!";
+            // document.getElementById("popupImg").src = "";
+        } else {
+            let idx = Math.floor(Math.random() * messages.length);
+            let randomMsg = messages[idx];
+            document.getElementById("popupText").innerText = randomMsg.text;
+            document.getElementById("popupImg").src = randomMsg.img;
+            messages.splice(idx, 1); // Xóa lời chúc đã hiện
+        }
         document.getElementById("popup").classList.add("show");
         document.getElementById("overlay").classList.add("show");
     });
