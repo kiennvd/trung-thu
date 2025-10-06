@@ -1,4 +1,4 @@
-  // Biến toàn cục
+   // Biến toàn cục
     let originalMessages = [];
     let currentMessages = [];
     const lanternImages = [];
@@ -25,7 +25,6 @@
         currentMessages = [...originalMessages];
         closeLastPopup();
         
-        // Hiển thị thông báo và tự động thả lồng đèn đầu tiên
         setTimeout(() => {
             createLantern();
         }, 500);
