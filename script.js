@@ -85,10 +85,10 @@ const lastPopup = document.getElementById("lastPopup");
 const lastPopupText = document.getElementById("lastPopupText");
 
 function showFirstPopup() {
-    // firstPopupText.textContent = "Chúc em một mùa Trung Thu thật vui vẻ, bình an và nhiều kỷ niệm đẹp!";
     firstPopupText.textContent = "Trung Thu năm nay không có trăng, nhưng vẫn có người âm thầm ước một điều – rằng những năm sau, khi bão qua, trời quang, bạn sẽ đọc lại lời chúc này và mỉm cười. Vì mình vẫn ở đó, chờ ánh trăng dành riêng cho chúng ta.";
     firstPopup.classList.add("show");
     document.getElementById("releaseBtn").style.display = "none";
+    document.getElementById("closeFirstPopupBtn").textContent = "Thả đèn"; // Đổi tên nút
 }
 
 function closeFirstPopup() {
