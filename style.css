@@ -1,411 +1,408 @@
- * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-    }
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    body {
-        margin: 0;
-        height: 100vh;
-        background: radial-gradient(ellipse at bottom, #2b3765 0%, #1b2735 60%, #090a0f 100%);
-        overflow: hidden;
-        font-family: 'Pacifico', cursive;
-        position: relative;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(ellipse at bottom, #2b3765 0%, #1b2735 60%, #090a0f 100%);
+    overflow: hidden;
+    font-family: 'Pacifico', cursive;
+    position: relative;
+}
 
+/* === SAO - GOM TẤT CẢ HIỆU ỨNG SAO === */
+.star {
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 80%, #ffd700 100%);
+    box-shadow: 0 0 4px 1px #fff, 0 0 8px 2px #ffd70055;
+    opacity: 0.85;
+    position: absolute;
+}
+
+/* Hiệu ứng nhấp nháy chính */
+.star.twinkle-slow { 
+    animation: twinkleSlow 10s ease-in-out infinite; 
+}
+.star.twinkle-medium { 
+    animation: twinkleMedium 15s ease-in-out infinite; 
+}
+
+@keyframes twinkleSlow {
+    0%, 90%, 100% { opacity: 0.3; transform: scale(0.8); }
+    5% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes twinkleMedium {
+    0%, 95%, 100% { opacity: 0.4; transform: scale(0.9); }
+    8% { opacity: 0.9; transform: scale(1.3); }
+}
+
+/* === MẶT TRĂNG === */
+.moon {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 25vw;
+    max-width: 120px;
+    min-width: 60px;
+    filter: drop-shadow(0 0 40px #fff8) drop-shadow(0 0 80px #ffd70088);
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* === LỒNG ĐÈN === */
+#starsContainer,
+#lanternsContainer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#lanternsContainer {
+    z-index: 3;
+}
+
+.lantern {
+    position: absolute;
+    bottom: 0;
+    width: 15vw;
+    max-width: 100px;
+    min-width: 35px;
+    opacity: 0;
+    animation: flyUp linear forwards;
+    user-select: none;
+    cursor: pointer;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: drop-shadow(0 0 18px #ffd700cc) drop-shadow(0 0 32px #ff980088);
+    background: none;
+}
+
+.lantern:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 32px #ffd700ee) drop-shadow(0 0 48px #ff9800cc);
+    z-index: 10;
+}
+
+@keyframes flyUp {
+    0%   { transform: translate(0, 0) scale(0.8) rotate(-5deg); opacity: 0; }
+    10%  { opacity: 1; }
+    50%  { transform: translate(var(--x,0), -55vh) scale(1.05) rotate(5deg);}
+    100% { transform: translate(var(--x,0), -110vh) scale(1.1) rotate(-5deg); opacity: 0; }
+}
+
+/* === NÚT BẤM === */
+#releaseBtn {
+    position: fixed;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ffd8a6 0%, #ffb347 100%);
+    color: #8B4513;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.15rem;
+    font-weight: bold;
+    padding: 16px 40px;
+    border: none;
+    border-radius: 32px;
+    box-shadow: 0 6px 25px rgba(255, 184, 77, 0.4), 0 2px 8px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    letter-spacing: 1px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#releaseBtn:hover {
+    background: linear-gradient(135deg, #ffb347 0%, #ffd8a6 100%);
+    transform: translateX(-50%) scale(1.08);
+    box-shadow: 0 8px 30px rgba(255, 184, 77, 0.6), 0 2px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Nút phụ */
+.btn-secondary {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffd8b3 100%);
+    color: #8B4513;
+    font-family: 'Pacifico', cursive;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 20px;
+    border: 2px solid #ffd8a6;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(255, 184, 77, 0.3);
+    min-width: 80px;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #ffd8b3 0%, #fff9e6 100%);
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(255, 184, 77, 0.4);
+}
+
+/* Nút xem lại */
+.btn-restart {
+    background: linear-gradient(135deg, #ffd8a6 0%, #ffb347 100%);
+    color: #8B4513;
+    font-family: 'Pacifico', cursive;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 18px;
+    border: 2px solid #ffb347;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(255, 184, 77, 0.3);
+    min-width: 120px;
+}
+
+.btn-restart:hover {
+    background: linear-gradient(135deg, #ffb347 0%, #ffd8a6 100%);
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(255, 184, 77, 0.4);
+}
+
+/* Container nút */
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+/* === OVERLAY === */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+#overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* === POPUP CHUNG === */
+#popup, .custom-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
+    padding: 24px 18px 18px 18px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 25px 6px rgba(255, 184, 77, 0.3), 0 0 8px 2px rgba(255, 215, 0, 0.2);
+    z-index: 1001;
+    max-width: 92vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 2px solid #ffd8a6;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Pacifico', cursive;
+    color: #8B4513;
+    will-change: transform, opacity;
+    visibility: hidden;
+}
+
+#popup.show, .custom-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    box-shadow: 0 0 35px 12px rgba(255, 184, 77, 0.4), 0 0 15px 4px rgba(255, 215, 0, 0.3);
+    visibility: visible;
+}
+
+#popup p, .custom-popup p {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #8B4513;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    font-family: 'Pacifico', cursive;
+}
+
+#popup img {
+    width: 70%;
+    max-width: 220px;
+    border-radius: 14px;
+    margin: 12px 0;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#popup img.loaded {
+    opacity: 1;
+}
+
+/* Nút Đóng trong popup đặc biệt */
+#popup .btn-secondary {
+    font-size: 0.8rem;
+    padding: 6px 16px;
+    border: 1px solid #ffd8a6;
+    border-radius: 15px;
+    box-shadow: 0 1px 3px rgba(255, 184, 77, 0.3);
+    margin-top: 8px;
+    min-width: 60px;
+    max-width: 80px;
+}
+
+/* === HIỆU ỨNG TRÁI TIM === */
+.heart {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 9999;
+    background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+    animation: heartUp 1.2s ease forwards;
+}
+
+@keyframes heartUp {
+    0% { opacity: 1; transform: scale(0.7) translateY(0);}
+    80% { opacity: 1; transform: scale(1.2) translateY(-80px);}
+    100% { opacity: 0; transform: scale(1.4) translateY(-120px);}
+}
+
+/* === MÂY === */
+.cloud {
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(8px);
+    animation: drift 40s linear infinite;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(6px);
+}
+
+.cloud::before {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: 15px;
+}
+
+.cloud::after {
+    width: 40px;
+    height: 40px;
+    top: -10px;
+    right: 20px;
+}
+
+@keyframes drift {
+    0% { transform: translateX(-150px) translateY(0); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateX(calc(100vw + 150px)) translateY(20px); opacity: 0; }
+}
+
+/* === MEDIA QUERIES - MOBILE === */
+@media (max-width: 600px) {
     .star {
-        width: 3.5px;
-        height: 3.5px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #fff 80%, #ffd700 100%);
-        box-shadow:
-            0 0 8px 2px #fff,
-            0 0 16px 4px #ffd70055,
-            0 0 20px 6px #aeefff22;
-        opacity: 0.85;
-        animation: starMove 28s linear infinite;
-        position: absolute;
+        width: 1.5px;
+        height: 1.5px;
+        box-shadow: 0 0 3px 1px #fff, 0 0 6px 2px #ffd70055;
     }
-
-    @keyframes starMove {
-        0%   { transform: translateY(0) translateX(0); }
-        25%  { transform: translateY(-10px) translateX(10px);}
-        50%  { transform: translateY(-30px) translateX(-10px);}
-        75%  { transform: translateY(-50px) translateX(10px);}
-        100% { transform: translateY(-70px) translateX(0);}
+    
+    .star.twinkle-slow,
+    .star.twinkle-medium {
+        animation-duration: 12s;
     }
-
-    .moon {
-        position: absolute;
-        top: 5%;
-        right: 5%;
-        width: 25vw;
-        max-width: 120px;
-        min-width: 60px;
-        filter: drop-shadow(0 0 40px #fff8) drop-shadow(0 0 80px #ffd70088);
-        z-index: 1;
-        user-select: none;
-        pointer-events: none;
-    }
-
-    #starsContainer,
-    #lanternsContainer {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 0;
-    }
-
-    #lanternsContainer {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 3;
-    }
-
+    
     .lantern {
-        position: absolute;
-        bottom: 0;
-        width: 15vw;
-        max-width: 100px;
-        min-width: 35px;
-        opacity: 0;
-        animation: flyUp linear forwards;
-        user-select: none;
-        cursor: pointer;
-        transition: transform 0.4s ease, filter 0.4s ease;
-        filter: drop-shadow(0 0 18px #ffd700cc) drop-shadow(0 0 32px #ff980088);
-        background: none;
+        width: 12vw;
+        max-width: 40px;
+        min-width: 18px;
+        animation-duration: 14s !important;
     }
-    .lantern:hover {
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 32px #ffd700ee) drop-shadow(0 0 48px #ff9800cc);
-        z-index: 10;
+    
+    #popup, .custom-popup {
+        padding: 16px 12px 14px 12px;
+        border-radius: 16px;
+        max-width: 95vw;
     }
-
-    @keyframes flyUp {
-        0%   { transform: translate(0, 0) scale(0.8) rotate(-5deg); opacity: 0; }
-        10%  { opacity: 1; }
-        50%  { transform: translate(var(--x,0), -55vh) scale(1.05) rotate(5deg);}
-        100% { transform: translate(var(--x,0), -110vh) scale(1.1) rotate(-5deg); opacity: 0; }
-    }
-
-    /* Nút chính - Xem lời chúc */
-    #releaseBtn {
-        position: fixed;
-        left: 50%;
-        bottom: 4%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #ffd8a6 0%, #ffb347 100%);
-        color: #8B4513;
-        font-family: 'Pacifico', cursive;
-        font-size: 1.15rem;
-        font-weight: bold;
-        padding: 16px 40px;
-        border: none;
-        border-radius: 32px;
-        box-shadow: 0 6px 25px rgba(255, 184, 77, 0.4), 0 2px 8px rgba(255, 255, 255, 0.2);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 1002;
-        letter-spacing: 1px;
-        outline: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    #releaseBtn:hover {
-        background: linear-gradient(135deg, #ffb347 0%, #ffd8a6 100%);
-        transform: translateX(-50%) scale(1.08);
-        box-shadow: 0 8px 30px rgba(255, 184, 77, 0.6), 0 2px 12px rgba(255, 255, 255, 0.3);
-    }
-
-    /* Nút phụ - Đóng, Thả đèn - SỬA LẠI KÍCH THƯỚC */
-    .btn-secondary {
-        background: linear-gradient(135deg, #fff9e6 0%, #ffd8b3 100%);
-        color: #8B4513;
-        font-family: 'Pacifico', cursive;
-        font-size: 0.9rem;
-        font-weight: 500;
-        padding: 6px 20px;
-        border: 2px solid #ffd8a6;
-        border-radius: 18px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(255, 184, 77, 0.3);
-        min-width: 80px;
-    }
-
-    .btn-secondary:hover {
-        background: linear-gradient(135deg, #ffd8b3 0%, #fff9e6 100%);
-        transform: scale(1.05);
-        box-shadow: 0 3px 8px rgba(255, 184, 77, 0.4);
-    }
-
-    /* Nút xem lại */
-    .btn-restart {
-        background: linear-gradient(135deg, #ffd8a6 0%, #ffb347 100%);
-        color: #8B4513;
-        font-family: 'Pacifico', cursive;
-        font-size: 0.9rem;
-        font-weight: 500;
-        padding: 6px 18px;
-        border: 2px solid #ffb347;
-        border-radius: 18px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(255, 184, 77, 0.3);
-        min-width: 120px;
-    }
-
-    .btn-restart:hover {
-        background: linear-gradient(135deg, #ffb347 0%, #ffd8a6 100%);
-        transform: scale(1.05);
-        box-shadow: 0 3px 8px rgba(255, 184, 77, 0.4);
-    }
-
-    /* Container cho các nút trong popup */
-    .popup-buttons {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 16px;
-        flex-wrap: wrap;
-    }
-
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        z-index: 99;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        pointer-events: none;
-    }
-    #overlay.show {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    /* Popup chính */
-    #popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
-        padding: 24px 18px 18px 18px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow:
-            0 0 25px 6px rgba(255, 184, 77, 0.3),
-            0 0 8px 2px rgba(255, 215, 0, 0.2);
-        z-index: 1001;
-        max-width: 92vw;
-        max-height: 80vh;
-        overflow-y: auto;
-        border: 2px solid #ffd8a6;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-family: 'Pacifico', cursive;
-        color: #8B4513;
-        will-change: transform, opacity;
-        visibility: hidden;
-    }
-
-    #popup.show {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        pointer-events: auto;
-        box-shadow:
-            0 0 35px 12px rgba(255, 184, 77, 0.4),
-            0 0 15px 4px rgba(255, 215, 0, 0.3);
-        visibility: visible;
-    }
-
-    #popup p {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: #8B4513;
-        margin-bottom: 12px;
-        line-height: 1.6;
-        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
-        font-family: 'Pacifico', cursive;
-    }
-
+    
     #popup img {
-        width: 70%;
-        max-width: 220px;
-        border-radius: 14px;
-        margin: 12px 0;
-        box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        max-width: 110px;
+        margin: 10px 0;
     }
-
-    #popup img.loaded {
-        opacity: 1;
+    
+    #popup p, .custom-popup p {
+        font-size: 1.05rem;
+        margin-bottom: 10px;
     }
-
-    /* Custom popup */
-    .custom-popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
-        padding: 24px 18px 18px 18px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow:
-            0 0 25px 6px rgba(255, 184, 77, 0.3),
-            0 0 8px 2px rgba(255, 215, 0, 0.2);
-        z-index: 1001;
-        max-width: 92vw;
-        max-height: 80vh;
-        overflow-y: auto;
-        border: 2px solid #ffd8a6;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-family: 'Pacifico', cursive;
-        color: #8B4513;
-        overflow: hidden;
-        will-change: transform, opacity;
-        visibility: hidden;
+    
+    #releaseBtn {
+        font-size: 14px;
+        padding: 12px 24px;
+        bottom: 22%;
     }
-
-    .custom-popup.show {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        pointer-events: auto;
-        box-shadow:
-            0 0 35px 12px rgba(255, 184, 77, 0.4),
-            0 0 15px 4px rgba(255, 215, 0, 0.3);
-        visibility: visible;
+    
+    .btn-secondary, .btn-restart {
+        font-size: 0.85rem;
+        padding: 5px 16px;
+        min-width: 70px;
     }
-
-    .custom-popup p {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: #8B4513;
-        margin-bottom: 12px;
-        line-height: 1.6;
-        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    
+    .btn-restart {
+        min-width: 100px;
     }
-
-    .heart {
-        position: fixed;
-        width: 32px;
-        height: 32px;
-        left: 0; top: 0;
-        pointer-events: none;
-        z-index: 9999;
-        background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
-        animation: heartUp 1.2s ease forwards;
+    
+    .popup-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
     }
-    @keyframes heartUp {
-        0% { opacity: 1; transform: scale(0.7) translateY(0);}
-        80% { opacity: 1; transform: scale(1.2) translateY(-80px);}
-        100% { opacity: 0; transform: scale(1.4) translateY(-120px);}
+    
+    .btn-restart, .btn-secondary {
+        width: 80%;
+        max-width: 180px;
     }
-
-    @media (max-width: 600px) {
-        .star {
-            width: 2.2px;
-            height: 2.2px;
-            box-shadow:
-                0 0 4px 1px #fff,
-                0 0 8px 2px #ffd70055,
-                0 0 10px 3px #aeefff22;
-            animation: starMove 18s linear infinite;
-        }
-        .lantern {
-            width: 12vw;
-            max-width: 40px;
-            min-width: 18px;
-            animation-duration: 14s !important;
-        }
-        #popup {
-            padding: 16px 12px 14px 12px;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            max-width: 95vw;
-            max-height: 80vh;
-        }
-        #popup img {
-            max-width: 110px;
-            margin: 10px 0;
-        }
-        #popup p {
-            font-size: 1.05rem;
-            color: #8B4513;
-            margin-bottom: 10px;
-        }
-        #releaseBtn {
-            font-size: 14px;
-            padding: 12px 24px;
-            bottom: 22%;
-        }
-        .btn-secondary, .btn-restart {
-            font-size: 0.85rem;
-            padding: 5px 16px;
-            min-width: 70px;
-        }
-        .btn-restart {
-            min-width: 100px;
-        }
-        .popup-buttons {
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin-top: 14px;
-        }
-        .btn-restart, .btn-secondary {
-            width: 80%;
-            max-width: 180px;
-        }
-    }
-
+    
     #popup .btn-secondary {
-        background: linear-gradient(135deg, #fff9e6 0%, #ffd8b3 100%);
-        color: #8B4513;
-        font-family: 'Pacifico', cursive;
-        font-size: 0.8rem;
-        font-weight: 500;
-        padding: 6px 16px;
-        border: 1px solid #ffd8a6;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 1px 3px rgba(255, 184, 77, 0.3);
-        margin-top: 8px;
-        width: auto;
-        min-width: 60px;
-        max-width: 80px;
+        font-size: 0.75rem;
+        padding: 5px 12px;
+        margin-top: 6px;
+        min-width: 50px;
+        max-width: 70px;
     }
-
-    #popup .btn-secondary:hover {
-        background: linear-gradient(135deg, #ffd8b3 0%, #fff9e6 100%);
-        transform: scale(1.05);
-        box-shadow: 0 2px 5px rgba(255, 184, 77, 0.4);
-    }
-
-    @media (max-width: 600px) {
-        #popup .btn-secondary {
-            font-size: 0.75rem;
-            padding: 5px 12px;
-            margin-top: 6px;
-            min-width: 50px;
-            max-width: 70px;
-        }
-    }
+}
