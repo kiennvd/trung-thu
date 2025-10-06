@@ -1,4 +1,4 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
         width: 100vw;
@@ -146,6 +146,36 @@
         box-shadow: 0 4px 12px rgba(255, 184, 77, 0.4);
     }
 
+    /* Nút xem lại */
+    .btn-restart {
+        background: linear-gradient(135deg, #ffd8a6 0%, #ffb347 100%);
+        color: #8B4513;
+        font-family: 'Pacifico', cursive;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 8px 20px;
+        border: 2px solid #ffb347;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(255, 184, 77, 0.3);
+    }
+
+    .btn-restart:hover {
+        background: linear-gradient(135deg, #ffb347 0%, #ffd8a6 100%);
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 184, 77, 0.4);
+    }
+
+    /* Container cho các nút trong popup */
+    .popup-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 16px;
+        flex-wrap: wrap;
+    }
+
     #overlay {
         position: fixed;
         top: 0;
@@ -187,7 +217,6 @@
         font-family: 'Pacifico', cursive;
         color: #8B4513;
         will-change: transform, opacity;
-        /* Ẩn nội dung cũ khi popup đóng */
         visibility: hidden;
     }
 
@@ -198,7 +227,6 @@
         box-shadow:
             0 0 35px 12px rgba(255, 184, 77, 0.4),
             0 0 15px 4px rgba(255, 215, 0, 0.3);
-        /* Hiện nội dung khi popup mở */
         visibility: visible;
     }
 
@@ -218,7 +246,6 @@
         border-radius: 14px;
         margin-top: 12px;
         box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
-        /* Đảm bảo ảnh load mượt mà */
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -306,11 +333,6 @@
             min-width: 18px;
             animation-duration: 14s !important;
         }
-        #mainWish {
-            font-size: 1.4rem;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-        }
         #popup {
             padding: 12px 6px 10px 6px;
             border-radius: 12px;
@@ -330,8 +352,17 @@
             padding: 12px 24px;
             bottom: 22%;
         }
-        .btn-secondary {
+        .btn-secondary, .btn-restart {
             font-size: 0.9rem;
             padding: 6px 18px;
+        }
+        .popup-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-restart, .btn-secondary {
+            width: 80%;
+            max-width: 200px;
         }
     }
