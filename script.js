@@ -46,7 +46,8 @@ function createLantern() {
 
     lantern.addEventListener("click", () => {
         if (messages.length === 0) {
-            document.getElementById("popupText").innerText = "Bạn đã xem hết tất cả lời chúc!";
+            showLastPopup();
+            // document.getElementById("popupText").innerText = "Bạn đã xem hết tất cả lời chúc!";
             // document.getElementById("popupImg").src = "";
         } else {
             let idx = Math.floor(Math.random() * messages.length);
@@ -123,5 +124,5 @@ function startLanterns() {
             clearInterval(lanternInterval);
         }
     }, 1200);
-    setTimeout(showLastPopup, 30000); // Hiện popup cuối sau 30 giây
+    // setTimeout(showLastPopup, 30000); // Hiện popup cuối sau 30 giây
 }
