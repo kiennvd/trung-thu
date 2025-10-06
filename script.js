@@ -9,17 +9,17 @@ for (let i = 0; i < starCount; i++) {
 }
 
 const lanternImages = [];
-for (let i = 1; i <= 9; i++) lanternImages.push(`./style/img/lantern/ld (${i}).png`);
+for (let i = 1; i <= 9; i++) lanternImages.push(`./img/lantern/ld (${i}).png`);
 
 const messages = [
-    { text: "Chúc bạn Trung thu bình yên, dẫu mưa hay gió vẫn có những niềm vui nhỏ len lỏi trong lòng", img: "./style/img/YN1.jpg" },
-    { text: "Trung thu trăng không cần thật tròn, chỉ cần bạn luôn giữ được nụ cười và niềm tin vào những điều tốt đẹp.", img: "./style/img/YN2.jpg" },
-    { text: "Mong bạn học giỏi hơn mỗi ngày, bước đi vững vàng trên con đường mà bạn đã chọn.", img: "./style/img/YN3.jpg" },
-    { text: "Trung thu là để nhớ về những điều trong sáng — mong lòng bạn cũng luôn trong trẻo như ánh đèn đêm nay.", img: "./style/img/YN4.jpg" },
-    { text: "Hy vọng tương lai bạn đi qua sẽ ngập tràn ánh sáng, và luôn có người tốt bên cạnh giúp đỡ.", img: "./style/img/YN5.jpg" },
-    { text: "Mong mọi ước mơ của bạn đều sớm thành hiện thực, dù là nhỏ bé nhất", img: "./style/img/YN6.jpg" },
-    { text: "Trung thu này, chúc bạn an nhiên, tự tin, và luôn tin rằng ngày mai sẽ tốt hơn hôm nay.", img: "./style/img/YN7.jpg" },
-    { text: "Ước rằng mọi điều tốt đẹp sẽ đến với bạn — bình yên trong tâm, hạnh phúc trong lòng, và thành công trên từng bước đi.", img: "./style/img/YN8.jpg" }
+    { text: "Chúc bạn Trung thu bình yên, dẫu mưa hay gió vẫn có những niềm vui nhỏ len lỏi trong lòng", img: "./img/YN1.jpg" },
+    { text: "Trung thu trăng không cần thật tròn, chỉ cần bạn luôn giữ được nụ cười và niềm tin vào những điều tốt đẹp.", img: "./img/YN2.jpg" },
+    { text: "Mong bạn học giỏi hơn mỗi ngày, bước đi vững vàng trên con đường mà bạn đã chọn.", img: "./img/YN3.jpg" },
+    { text: "Trung thu là để nhớ về những điều trong sáng — mong lòng bạn cũng luôn trong trẻo như ánh đèn đêm nay.", img: "./img/YN4.jpg" },
+    { text: "Hy vọng tương lai bạn đi qua sẽ ngập tràn ánh sáng, và luôn có người tốt bên cạnh giúp đỡ.", img: "./img/YN5.jpg" },
+    { text: "Mong mọi ước mơ của bạn đều sớm thành hiện thực, dù là nhỏ bé nhất", img: "./img/YN6.jpg" },
+    { text: "Trung thu này, chúc bạn an nhiên, tự tin, và luôn tin rằng ngày mai sẽ tốt hơn hôm nay.", img: "./img/YN7.jpg" },
+    { text: "Ước rằng mọi điều tốt đẹp sẽ đến với bạn — bình yên trong tâm, hạnh phúc trong lòng, và thành công trên từng bước đi.", img: "./img/YN8.jpg" }
 ];
 
 const lanternsContainer = document.getElementById("lanternsContainer");
