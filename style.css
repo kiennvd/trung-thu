@@ -1,4 +1,4 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+ * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
         width: 100vw;
@@ -163,12 +163,12 @@
         pointer-events: auto;
     }
 
-    /* Popup chính */
+    /* Popup chính - SỬA LỖI GIẬT */
     #popup {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(0.92);
+        transform: translate(-50%, -50%) scale(0.8); /* Bắt đầu từ scale nhỏ hơn */
         background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
         padding: 26px 18px 20px 18px;
         border-radius: 20px;
@@ -183,14 +183,16 @@
         border: 2px solid #ffd8a6;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.4s cubic-bezier(.77,.2,.24,1.01);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Timing function mượt hơn */
         font-family: 'Pacifico', cursive;
         color: #8B4513;
+        /* Thêm will-change để tối ưu hiệu suất */
+        will-change: transform, opacity;
     }
 
     #popup.show {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1); /* Kết thúc ở scale 1 */
         pointer-events: auto;
         box-shadow:
             0 0 35px 12px rgba(255, 184, 77, 0.4),
@@ -215,12 +217,12 @@
         box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
     }
 
-    /* Custom popup */
+    /* Custom popup - SỬA LỖI GIẬT */
     .custom-popup {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(0.92);
+        transform: translate(-50%, -50%) scale(0.8); /* Bắt đầu từ scale nhỏ hơn */
         background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
         padding: 28px 18px 22px 18px;
         border-radius: 22px;
@@ -235,15 +237,17 @@
         border: 2px solid #ffd8a6;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.4s cubic-bezier(.77,.2,.24,1.01);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Timing function mượt hơn */
         font-family: 'Pacifico', cursive;
         color: #8B4513;
         overflow: hidden;
+        /* Thêm will-change để tối ưu hiệu suất */
+        will-change: transform, opacity;
     }
 
     .custom-popup.show {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1); /* Kết thúc ở scale 1 */
         pointer-events: auto;
         box-shadow:
             0 0 35px 12px rgba(255, 184, 77, 0.4),
@@ -273,23 +277,6 @@
         0% { opacity: 1; transform: scale(0.7) translateY(0);}
         80% { opacity: 1; transform: scale(1.2) translateY(-80px);}
         100% { opacity: 0; transform: scale(1.4) translateY(-120px);}
-    }
-
-    #mainWish {
-        position: fixed;
-        top: 6%;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 2.2rem;
-        color: #ffd8a6;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 184, 77, 0.4);
-        font-family: 'Pacifico', cursive;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.08);
-        padding: 10px 24px;
-        border-radius: 18px;
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(255, 216, 166, 0.2);
     }
 
     @media (max-width: 600px) {

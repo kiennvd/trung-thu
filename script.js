@@ -1,4 +1,4 @@
-  const starCount = window.innerWidth < 600 ? 80 : 200;
+ const starCount = window.innerWidth < 600 ? 80 : 200;
     for (let i = 0; i < starCount; i++) {
         let star = document.createElement("div");
         star.className = "star";
@@ -53,8 +53,12 @@
                 document.getElementById("popupText").innerText = randomMsg.text;
                 document.getElementById("popupImg").src = randomMsg.img;
                 messages.splice(idx, 1); // Xóa lời chúc đã hiện
-                document.getElementById("popup").classList.add("show");
-                document.getElementById("overlay").classList.add("show");
+                
+                // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
+                setTimeout(() => {
+                    document.getElementById("popup").classList.add("show");
+                    document.getElementById("overlay").classList.add("show");
+                }, 10);
             }
         });
 
@@ -89,23 +93,36 @@
 
     function showFirstPopup() {
         firstPopupText.textContent = "Trung Thu năm nay không có trăng, nhưng vẫn có người âm thầm ước một điều – rằng những năm sau, khi bão qua, trời quang, bạn sẽ đọc lại lời chúc này và mỉm cười. Vì mình vẫn ở đó, chờ ánh trăng dành riêng cho chúng ta.";
-        firstPopup.classList.add("show");
+        
+        // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
+        setTimeout(() => {
+            firstPopup.classList.add("show");
+            document.getElementById("overlay").classList.add("show");
+        }, 10);
+        
         document.getElementById("releaseBtn").style.display = "none";
         document.getElementById("closeFirstPopupBtn").textContent = "Thả đèn";
     }
 
     function closeFirstPopup() {
         firstPopup.classList.remove("show");
+        document.getElementById("overlay").classList.remove("show");
         startLanterns();
     }
 
     function showLastPopup() {
         lastPopupText.textContent = "Cảm ơn bạn đã xem hết điều mình muốn gửi gắm. Mong bạn luôn vui vẻ và hạnh phúc. Nếu có dịp, mình rất muốn cùng bạn đi chơi Trung Thu!";
-        lastPopup.classList.add("show");
+        
+        // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
+        setTimeout(() => {
+            lastPopup.classList.add("show");
+            document.getElementById("overlay").classList.add("show");
+        }, 10);
     }
 
     function closeLastPopup() {
         lastPopup.classList.remove("show");
+        document.getElementById("overlay").classList.remove("show");
     }
 
     function startLanterns() {
