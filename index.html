@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mid-Autumn Festival</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+  <img class="moon" src="./style/img/moon.png" alt="Moon">
+  <div id="lanternsContainer"></div>
+  <div id="overlay"></div>
+  <div id="starsContainer"></div>
+
+  <div id="popup">
+    <p id="popupText"></p>
+    <img id="popupImg" src="" alt="popup image">
+    <br>
+    <button onclick="closePopup()">Đóng</button>
+  </div>
+  
+  <div id="firstPopup" class="custom-popup">
+    <p id="firstPopupText"></p>
+    <button onclick="closeFirstPopup()">Đóng</button>
+  </div>
+  <div id="lastPopup" class="custom-popup">
+    <p id="lastPopupText"></p>
+    <button onclick="closeLastPopup()">Đóng</button>
+  </div>
+
+  <button id="releaseBtn">Gửi yêu thương</button>
+  <audio id="bgMusic" src="./style/LoiTheDuoiAnhTrang.mp3" loop></audio>
+
+  <script src="./style/script.js"></script>
+</body>
+</html>
