@@ -55,9 +55,9 @@ function createLantern() {
             document.getElementById("popupText").innerText = randomMsg.text;
             document.getElementById("popupImg").src = randomMsg.img;
             messages.splice(idx, 1); // Xóa lời chúc đã hiện
+            document.getElementById("popup").classList.add("show");
+            document.getElementById("overlay").classList.add("show");
         }
-        document.getElementById("popup").classList.add("show");
-        document.getElementById("overlay").classList.add("show");
     });
 
     lanternsContainer.appendChild(lantern);
