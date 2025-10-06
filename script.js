@@ -33,12 +33,10 @@
         lantern.src = lanternImages[Math.floor(Math.random() * lanternImages.length)];
         lantern.className = "lantern";
 
-        // Giới hạn lantern không tràn màn hình
-        let startX = Math.random() * 85; // 0% -> 85%
+        let startX = Math.random() * 85;
         lantern.style.left = startX + "vw";
 
-        // random horizontal drift
-        let driftX = (Math.random() - 0.5) * 50; // ±25vw
+        let driftX = (Math.random() - 0.5) * 50;
         lantern.style.setProperty('--x', driftX + 'vw');
 
         let duration = 10 + Math.random() * 10;
@@ -50,15 +48,43 @@
             } else {
                 let idx = Math.floor(Math.random() * messages.length);
                 let randomMsg = messages[idx];
-                document.getElementById("popupText").innerText = randomMsg.text;
-                document.getElementById("popupImg").src = randomMsg.img;
-                messages.splice(idx, 1); // Xóa lời chúc đã hiện
                 
-                // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
-                setTimeout(() => {
-                    document.getElementById("popup").classList.add("show");
-                    document.getElementById("overlay").classList.add("show");
-                }, 10);
+                // QUAN TRỌNG: Reset trạng thái ảnh trước khi update
+                const popupImg = document.getElementById("popupImg");
+                popupImg.classList.remove("loaded");
+                popupImg.style.opacity = "0";
+                
+                // Update nội dung
+                document.getElementById("popupText").innerText = randomMsg.text;
+                popupImg.src = randomMsg.img;
+                popupImg.alt = "Lời chúc Trung Thu";
+                
+                // Đợi ảnh load xong rồi mới hiện popup
+                popupImg.onload = function() {
+                    popupImg.classList.add("loaded");
+                    popupImg.style.opacity = "1";
+                    
+                    // Force reflow để đảm bảo DOM update trước khi show popup
+                    void document.getElementById("popup").offsetWidth;
+                    
+                    // Hiện popup sau khi mọi thứ đã sẵn sàng
+                    setTimeout(() => {
+                        document.getElementById("popup").classList.add("show");
+                        document.getElementById("overlay").classList.add("show");
+                    }, 50);
+                };
+                
+                // Fallback nếu ảnh load lỗi
+                popupImg.onerror = function() {
+                    popupImg.classList.add("loaded");
+                    popupImg.style.opacity = "1";
+                    setTimeout(() => {
+                        document.getElementById("popup").classList.add("show");
+                        document.getElementById("overlay").classList.add("show");
+                    }, 50);
+                };
+                
+                messages.splice(idx, 1);
             }
         });
 
@@ -74,7 +100,13 @@
     function closePopup() {
         document.getElementById("popup").classList.remove("show");
         document.getElementById("overlay").classList.remove("show");
+        
+        // Reset ảnh khi đóng popup
+        const popupImg = document.getElementById("popupImg");
+        popupImg.classList.remove("loaded");
+        popupImg.style.opacity = "0";
     }
+
     document.getElementById("overlay").addEventListener("click", closePopup);
 
     function showHeartEffect(x, y) {
@@ -94,11 +126,13 @@
     function showFirstPopup() {
         firstPopupText.textContent = "Trung Thu năm nay không có trăng, nhưng vẫn có người âm thầm ước một điều – rằng những năm sau, khi bão qua, trời quang, bạn sẽ đọc lại lời chúc này và mỉm cười. Vì mình vẫn ở đó, chờ ánh trăng dành riêng cho chúng ta.";
         
-        // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
+        // Force reflow trước khi show
+        void firstPopup.offsetWidth;
+        
         setTimeout(() => {
             firstPopup.classList.add("show");
             document.getElementById("overlay").classList.add("show");
-        }, 10);
+        }, 50);
         
         document.getElementById("releaseBtn").style.display = "none";
         document.getElementById("closeFirstPopupBtn").textContent = "Thả đèn";
@@ -113,11 +147,13 @@
     function showLastPopup() {
         lastPopupText.textContent = "Cảm ơn bạn đã xem hết điều mình muốn gửi gắm. Mong bạn luôn vui vẻ và hạnh phúc. Nếu có dịp, mình rất muốn cùng bạn đi chơi Trung Thu!";
         
-        // Thêm delay nhỏ để đảm bảo DOM đã cập nhật
+        // Force reflow trước khi show
+        void lastPopup.offsetWidth;
+        
         setTimeout(() => {
             lastPopup.classList.add("show");
             document.getElementById("overlay").classList.add("show");
-        }, 10);
+        }, 50);
     }
 
     function closeLastPopup() {
@@ -127,8 +163,10 @@
 
     function startLanterns() {
         document.getElementById("releaseBtn").style.display = "none";
-        song.currentTime = 57;
-        song.play();
+        if (song) {
+            song.currentTime = 57;
+            song.play().catch(e => console.log("Autoplay blocked:", e));
+        }
         lanternInterval = setInterval(() => {
             createLantern();
             if (lanternsContainer.querySelectorAll(".lantern").length >= maxLanterns) {
@@ -136,3 +174,14 @@
             }
         }, 1200);
     }
+
+    // Preload images để tăng tốc độ hiển thị
+    function preloadImages() {
+        messages.forEach(msg => {
+            const img = new Image();
+            img.src = msg.img;
+        });
+    }
+
+    // Preload images khi trang load
+    window.addEventListener('load', preloadImages);

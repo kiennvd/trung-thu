@@ -1,4 +1,4 @@
- * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
         width: 100vw;
@@ -163,12 +163,12 @@
         pointer-events: auto;
     }
 
-    /* Popup chính - SỬA LỖI GIẬT */
+    /* Popup chính */
     #popup {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(0.8); /* Bắt đầu từ scale nhỏ hơn */
+        transform: translate(-50%, -50%) scale(0.8);
         background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
         padding: 26px 18px 20px 18px;
         border-radius: 20px;
@@ -183,20 +183,23 @@
         border: 2px solid #ffd8a6;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Timing function mượt hơn */
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         font-family: 'Pacifico', cursive;
         color: #8B4513;
-        /* Thêm will-change để tối ưu hiệu suất */
         will-change: transform, opacity;
+        /* Ẩn nội dung cũ khi popup đóng */
+        visibility: hidden;
     }
 
     #popup.show {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1); /* Kết thúc ở scale 1 */
+        transform: translate(-50%, -50%) scale(1);
         pointer-events: auto;
         box-shadow:
             0 0 35px 12px rgba(255, 184, 77, 0.4),
             0 0 15px 4px rgba(255, 215, 0, 0.3);
+        /* Hiện nội dung khi popup mở */
+        visibility: visible;
     }
 
     #popup p {
@@ -215,14 +218,21 @@
         border-radius: 14px;
         margin-top: 12px;
         box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
+        /* Đảm bảo ảnh load mượt mà */
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 
-    /* Custom popup - SỬA LỖI GIẬT */
+    #popup img.loaded {
+        opacity: 1;
+    }
+
+    /* Custom popup */
     .custom-popup {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(0.8); /* Bắt đầu từ scale nhỏ hơn */
+        transform: translate(-50%, -50%) scale(0.8);
         background: linear-gradient(135deg, #fff9e6 80%, #ffd8b3 100%);
         padding: 28px 18px 22px 18px;
         border-radius: 22px;
@@ -237,21 +247,22 @@
         border: 2px solid #ffd8a6;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Timing function mượt hơn */
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         font-family: 'Pacifico', cursive;
         color: #8B4513;
         overflow: hidden;
-        /* Thêm will-change để tối ưu hiệu suất */
         will-change: transform, opacity;
+        visibility: hidden;
     }
 
     .custom-popup.show {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1); /* Kết thúc ở scale 1 */
+        transform: translate(-50%, -50%) scale(1);
         pointer-events: auto;
         box-shadow:
             0 0 35px 12px rgba(255, 184, 77, 0.4),
             0 0 15px 4px rgba(255, 215, 0, 0.3);
+        visibility: visible;
     }
 
     .custom-popup p {
